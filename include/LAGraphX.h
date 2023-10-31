@@ -869,4 +869,15 @@ int LAGraph_HelloWorld // a simple algorithm, just for illustration
     char *msg
 ) ;
 
+LAGRAPH_PUBLIC
+int LAGraph_HITS(
+    GrB_Vector * hubs,
+    GrB_Vector* authorities,
+    int * iters,
+    const LAGraph_Graph G,
+    float tol,
+    int itermax,
+    char *msg 
+);
+
 #endif
