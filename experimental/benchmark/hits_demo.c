@@ -99,7 +99,7 @@ int main (int argc, char **argv)
     int iters = 0, itermax = 1000;
     float tol = 1e-4 ;
     t = LAGraph_WallClockTime ( ) ;
-    LG_TRY (LAGraph_HITS (&hubs, &authorities, &iters, G, tol, itermax, msg)) ;
+    LG_TRY (LAGr_HITS (&hubs, &authorities, &iters, G, tol, itermax, msg)) ;
     t = LAGraph_WallClockTime ( ) - t ;
     printf ("Time for LAGraph_HelloWorld: %g sec\n", t) ;
     //--------------------------------------------------------------------------

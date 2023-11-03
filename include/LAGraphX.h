@@ -870,7 +870,7 @@ int LAGraph_HelloWorld // a simple algorithm, just for illustration
 ) ;
 
 LAGRAPH_PUBLIC
-int LAGraph_HITS(
+int LAGr_HITS(
     GrB_Vector * hubs,
     GrB_Vector* authorities,
     int * iters,
