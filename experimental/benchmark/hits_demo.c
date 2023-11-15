@@ -96,13 +96,14 @@ int main (int argc, char **argv)
     //--------------------------------------------------------------------------
     // GrB_free (&hubs);
     // GrB_free(&authorities);
-    int iters = 0, itermax = 1000;
-    float tol = 1e-4 ;
+    int iters = 0, itermax = 1;
+    float tol = 1e-6 ;
     t = LAGraph_WallClockTime ( ) ;
+    
     LG_TRY (LAGr_HITS (&hubs, &authorities, &iters, G, tol, itermax, msg)) ;
     t = LAGraph_WallClockTime ( ) - t ;
-    printf ("Time for LAGraph_HelloWorld: %g sec\n", t) ;
-    //--------------------------------------------------------------------------
+    printf ("Time for LAGr_HITS: %g sec\n", t) ;
+    //-------------------------------------------------------------------------- 
     // free everyting and finish
     //--------------------------------------------------------------------------
     printf("tolerance: %f\n", tol);
