@@ -45,9 +45,10 @@ int LAGr_HITS(
     GrB_Vector h = NULL, a = NULL, h_old = NULL, a_old=NULL;
     LG_ASSERT (hubs != NULL, GrB_NULL_POINTER) ;
     LG_ASSERT (authorities != NULL, GrB_NULL_POINTER) ;
+    // LG_ASSERT(G->in_degree != NULL, "G->in_degree required");
+    // LG_ASSERT(G->out_degree != NULL, "G->out_degree required");
     LG_TRY (LAGraph_CheckGraph (G, msg)) ;
     GrB_Matrix AT ;
-    
     if (G->kind == LAGraph_ADJACENCY_UNDIRECTED ||
         G->is_symmetric_structure == LAGraph_TRUE)
     {
@@ -78,14 +79,20 @@ int LAGr_HITS(
     GRB_TRY(GrB_assign(a, NULL, NULL, defaultValue, GrB_ALL, n, NULL));
     GRB_TRY(GrB_assign(h, NULL, NULL, defaultValue, GrB_ALL, n, NULL));
 
-    bool flag = false;
+    int indegree, outdegree;
+
+    GrB_reduce(&indegree, NULL, GrB_PLUS_MONOID_INT32, G->in_degree, NULL);
+    GrB_reduce(&outdegree, NULL, GrB_PLUS_MONOID_INT32, G->out_degree, NULL);
+
+
+    bool flag = (indegree + outdegree) > n/16.0;
 
     for((*iters) = 0; (*iters) < itermax && rdiff > tol; (*iters)++) {
         // Save old values of h and a       
         GrB_Vector temp = h_old ; h_old = h ; h = temp ;
         temp = a_old ; a_old = a ; a = temp ;
 
-        GxB_set(GxB_BURBLE, true);
+        // GxB_set(GxB_BURBLE, true);
         if(flag) {
             //a = 0
             GRB_TRY(GrB_assign(a, NULL, GrB_PLUS_FP32, 0.0, GrB_ALL, n, NULL));
@@ -111,7 +118,7 @@ int LAGr_HITS(
         float maxH;
         GRB_TRY(GrB_reduce(&maxH, NULL, GrB_MAX_MONOID_FP32, h, NULL));
         GRB_TRY(GrB_assign(h,NULL, GrB_DIV_FP32, maxH, GrB_ALL, n, NULL));
-
+    
         // Deal with tolerance
 
         // a_old -= a

@@ -85,6 +85,9 @@ int main (int argc, char **argv)
         NULL,       // prefered GrB_Type of G->A; null if no preference
         false,      // ensure all entries are positive, if true
         argc, argv)) ;  // input to this main program
+    LG_TRY(LAGraph_Cached_OutDegree(G, msg));
+    LG_TRY(LAGraph_Cached_InDegree(G, msg));
+    
   //  t = LAGraph_WallClockTime ( ) - t ;
   //  printf ("Time to read the graph:      %g sec\n", t) ;
 
