@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// LAGraph/experimental/benchmark/helloworld_demo.c: a simple demo
+// LAGraph/experimental/benchmark/hits_demo.c: a simple demo
 //------------------------------------------------------------------------------
 
 // LAGraph, (c) 2019-2022 by The LAGraph Contributors, All Rights Reserved.
@@ -11,12 +11,12 @@
 // funding and support from the U.S. Government (see Acknowledgments.txt file).
 // DM22-0790
 
-// Contributed by Timothy A Davis, Texas A&M University
+// Contributed by Aurko Routh, Texas A&M University
 
 //------------------------------------------------------------------------------
 
 // This main program is a simple driver for testing and benchmarking the
-// LAGraph_HelloWorld "algorithm", in experimental/algorithm.  To use it,
+// LAGr_HITS "algorithm", in experimental/algorithm.  To use it,
 // compile LAGraph while in the build folder with these commands:
 //
 //      cd LAGraph/build
@@ -29,15 +29,6 @@
 //      ./experimental/benchmark/hellworld_demo < ../data/west0067.mtx
 //      ./experimental/benchmark/hellworld_demo ../data/karate.mtx
 //
-// If you create your own algorithm and want to mimic this main program, call
-// it write in experimental/benchmark/whatever_demo.c (with "_demo.c" as the
-// end of the filename), and the cmake will find it and compile it.
-
-// This main program makes use of supporting utilities in
-// src/benchmark/LAGraph_demo.h and src/utility/LG_internal.h.
-// See helloworld2_demo.c for a main program that just uses the
-// user-callable methods in LAGraph.h and LAGraphX.h.
-
 #include "../../src/benchmark/LAGraph_demo.h"
 #include "LG_internal.h"
 #include <LAGraph.h>
@@ -85,21 +76,16 @@ int main (int argc, char **argv)
         NULL,       // prefered GrB_Type of G->A; null if no preference
         false,      // ensure all entries are positive, if true
         argc, argv)) ;  // input to this main program
+
+    t = LAGraph_WallClockTime ( ) - t ;
+    printf ("Time to read the graph:      %g sec\n", t) ;
+
+    printf ("\n==========================The input graph matrix G:\n") ;
+    LG_TRY (LAGraph_Graph_Print (G, LAGraph_SHORT, stdout, msg)) ;
     LG_TRY(LAGraph_Cached_OutDegree(G, msg));
     LG_TRY(LAGraph_Cached_InDegree(G, msg));
-    
-  //  t = LAGraph_WallClockTime ( ) - t ;
-  //  printf ("Time to read the graph:      %g sec\n", t) ;
 
-  //  printf ("\n==========================The input graph matrix G:\n") ;
-  //  LG_TRY (LAGraph_Graph_Print (G, LAGraph_SHORT, stdout, msg)) ;
-
-    //--------------------------------------------------------------------------
-    // try the LAGraph_HelloWorld "algorithm"
-    //--------------------------------------------------------------------------
-    // GrB_free (&hubs);
-    // GrB_free(&authorities);
-    int iters = 0, itermax = 1;
+    int iters = 0, itermax = 100;
     float tol = 1e-6 ;
     t = LAGraph_WallClockTime ( ) ;
     
@@ -109,19 +95,6 @@ int main (int argc, char **argv)
     //-------------------------------------------------------------------------- 
     // free everyting and finish
     //--------------------------------------------------------------------------
-    printf("tolerance: %f\n", tol);
-
-    GxB_Vector_fprint(authorities, "authorities", GxB_SHORT, stdout);
-    GxB_Vector_fprint(hubs, "hubs", GxB_SHORT, stdout);
-        //normalize
-    float sumA;
-    GRB_TRY(GrB_reduce(&sumA, NULL, GrB_PLUS_MONOID_FP32, authorities, NULL)); // Calculate the sum of all elements in the vector
-
-        //normalize
-    float sumH;
-    GRB_TRY(GrB_reduce(&sumH, NULL, GrB_PLUS_MONOID_FP32, hubs, NULL)); // Calculate the sum of all elements in the vector
-    printf("SUM a: %f, Sum h: %f\n", sumA, sumH);
-
     printf("Num iterations: %d\n", iters);
     
     LG_FREE_ALL ;

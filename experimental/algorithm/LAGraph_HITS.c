@@ -92,7 +92,6 @@ int LAGr_HITS(
         GrB_Vector temp = h_old ; h_old = h ; h = temp ;
         temp = a_old ; a_old = a ; a = temp ;
 
-        // GxB_set(GxB_BURBLE, true);
         if(flag) {
             //a = 0
             GRB_TRY(GrB_assign(a, NULL, GrB_PLUS_FP32, 0.0, GrB_ALL, n, NULL));
