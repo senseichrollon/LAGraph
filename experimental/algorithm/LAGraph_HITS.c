@@ -29,7 +29,7 @@
 }
 
 #include "LAGraphX.h"
-#include "LG_internal.h"
+#include "LG_internal.h"    
 
 // Check graph with error messages if it's empty
 int LAGr_HITS(

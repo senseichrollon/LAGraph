@@ -78,6 +78,7 @@ int main (int argc, char **argv)
         argc, argv)) ;  // input to this main program
 
     t = LAGraph_WallClockTime ( ) - t ;
+    LAGRAPH_TRY (LAGraph_SetNumThreads (1, 24, msg)) ;
     printf ("Time to read the graph:      %g sec\n", t) ;
 
     printf ("\n==========================The input graph matrix G:\n") ;
@@ -85,8 +86,8 @@ int main (int argc, char **argv)
     LG_TRY(LAGraph_Cached_OutDegree(G, msg));
     LG_TRY(LAGraph_Cached_InDegree(G, msg));
 
-    int iters = 0, itermax = 100;
-    float tol = 1e-6 ;
+    int iters = 0, itermax = 1000;
+    float tol = 1e-4;
     t = LAGraph_WallClockTime ( ) ;
     
     LG_TRY (LAGr_HITS (&hubs, &authorities, &iters, G, tol, itermax, msg)) ;
