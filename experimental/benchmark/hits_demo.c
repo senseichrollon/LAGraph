@@ -84,7 +84,7 @@ int main (int argc, char **argv)
     printf ("\n==========================The input graph matrix G:\n") ;
     LG_TRY (LAGraph_Graph_Print (G, LAGraph_SHORT, stdout, msg)) ;
     LG_TRY(LAGraph_Cached_OutDegree(G, msg));
-    LG_TRY(LAGraph_Cached_InDegree(G, msg));
+        LG_TRY(LAGraph_Cached_InDegree(G, msg));
 
     int iters = 0, itermax = 1000;
     float tol = 1e-4;

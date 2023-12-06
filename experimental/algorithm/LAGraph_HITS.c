@@ -45,8 +45,8 @@ int LAGr_HITS(
     GrB_Vector h = NULL, a = NULL, h_old = NULL, a_old=NULL;
     LG_ASSERT (hubs != NULL, GrB_NULL_POINTER) ;
     LG_ASSERT (authorities != NULL, GrB_NULL_POINTER) ;
-    // LG_ASSERT(G->in_degree != NULL, "G->in_degree required");
-    // LG_ASSERT(G->out_degree != NULL, "G->out_degree required");
+    LG_ASSERT(G->in_degree != NULL, "G->in_degree required");
+    LG_ASSERT(G->out_degree != NULL, "G->out_degree required");
     LG_TRY (LAGraph_CheckGraph (G, msg)) ;
     GrB_Matrix AT ;
     if (G->kind == LAGraph_ADJACENCY_UNDIRECTED ||
@@ -81,8 +81,13 @@ int LAGr_HITS(
 
     int indegree, outdegree;
 
-    GrB_reduce(&indegree, NULL, GrB_PLUS_MONOID_INT32, G->in_degree, NULL);
-    GrB_reduce(&outdegree, NULL, GrB_PLUS_MONOID_INT32, G->out_degree, NULL);
+
+    // Count the number of non-zero entries in the indegree vector
+    GrB_Vector_nvals(&indegree, G->in_degree);
+
+    // Count the number of non-zero entries in the outdegree vector
+    GrB_Vector_nvals(&outdegree, G->out_degree);
+
 
 
     bool flag = (indegree + outdegree) > n/16.0;
