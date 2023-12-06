@@ -96,6 +96,7 @@ int LAGr_HITS(
         // Save old values of h and a       
         GrB_Vector temp = h_old ; h_old = h ; h = temp ;
         temp = a_old ; a_old = a ; a = temp ;
+        GxB_set(GxB_BURBLE, false);
 
         if(flag) {
             //a = 0
