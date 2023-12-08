@@ -146,7 +146,7 @@ int LAGr_HITS(
 
         // rdiff = rdiff/2
         rdiff /= 2;
-        printf("%d %f\n", *iters, rdiff);
+        // printf("%d %f\n", *iters, rdiff);
     }
 
     // Normalize
