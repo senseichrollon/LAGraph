@@ -102,3 +102,4 @@ int main (int argc, char **argv)
     LG_TRY (LAGraph_Finalize (msg)) ;
     return (GrB_SUCCESS) ;
 }
+    
