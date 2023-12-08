@@ -87,7 +87,7 @@ int main (int argc, char **argv)
         LG_TRY(LAGraph_Cached_InDegree(G, msg));
 
     int iters = 0, itermax = 1000;
-    float tol = 1e-4;
+    float tol = 1e-6;
     t = LAGraph_WallClockTime ( ) ;
     
     LG_TRY (LAGr_HITS (&hubs, &authorities, &iters, G, tol, itermax, msg)) ;
