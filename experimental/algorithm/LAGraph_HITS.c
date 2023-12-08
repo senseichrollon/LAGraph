@@ -98,7 +98,7 @@ int LAGr_HITS(
         // Save old values of h and a       
         GrB_Vector temp = h_old ; h_old = h ; h = temp ;
         temp = a_old ; a_old = a ; a = temp ;
-        // GxB_set(GxB_BURBLE, true);
+        GxB_set(GxB_BURBLE, true);
         if(flag) {
             //a = 0
             GRB_TRY(GrB_assign(a, NULL, GrB_PLUS_FP32, 0.0, GrB_ALL, n, NULL));
@@ -114,7 +114,7 @@ int LAGr_HITS(
             // h = A . a
             GRB_TRY(GrB_mxv(h, NULL,NULL, LAGraph_plus_second_fp32, G->A, a_old, NULL));
         }
-        // GxB_set(GxB_BURBLE, false);
+        GxB_set(GxB_BURBLE, false);
 
         
         // float maxA;
