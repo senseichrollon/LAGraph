@@ -47,6 +47,7 @@ int LAGr_HITS(
     LG_ASSERT (authorities != NULL, GrB_NULL_POINTER) ;
     LG_ASSERT(G->in_degree != NULL, "G->in_degree required");
     LG_ASSERT(G->out_degree != NULL, "G->out_degree required");
+    printf("hi3\n");
     LG_TRY (LAGraph_CheckGraph (G, msg)) ;
     GrB_Matrix AT ;
     if (G->kind == LAGraph_ADJACENCY_UNDIRECTED ||
@@ -62,7 +63,7 @@ int LAGr_HITS(
         LG_ASSERT_MSG (AT != NULL,
             LAGRAPH_NOT_CACHED, "G->AT is required") ;
     }
-
+    printf("hi2\n");
     // Initializations
     GrB_Index n;
     (*hubs) = NULL;
