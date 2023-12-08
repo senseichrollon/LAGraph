@@ -68,7 +68,7 @@ int LAGr_HITS(
     (*hubs) = NULL;
     (*authorities) = NULL;
     GRB_TRY(GrB_Matrix_nrows(&n, AT))
-    float rdiff = 1;
+    float rdiff = 100;
 
     GRB_TRY (GrB_Vector_new (&h_old, GrB_FP32, n)) ;
     GRB_TRY (GrB_Vector_new (&a_old, GrB_FP32, n)) ;
@@ -91,7 +91,7 @@ int LAGr_HITS(
 
 
     bool flag = (indegree + outdegree) > n/16.0;
-
+    printf("hi\n");
     for((*iters) = 0; (*iters) < itermax && rdiff > tol; (*iters)++) {
         // Save old values of h and a       
         GrB_Vector temp = h_old ; h_old = h ; h = temp ;
