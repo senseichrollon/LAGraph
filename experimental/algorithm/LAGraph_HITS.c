@@ -42,6 +42,7 @@ int LAGr_HITS(
     char *msg 
 ) {
     LG_CLEAR_MSG ;
+    printf("hi4\n");
     GrB_Vector h = NULL, a = NULL, h_old = NULL, a_old=NULL;
     LG_ASSERT (hubs != NULL, GrB_NULL_POINTER) ;
     LG_ASSERT (authorities != NULL, GrB_NULL_POINTER) ;
