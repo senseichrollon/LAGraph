@@ -75,7 +75,7 @@ int LAGr_HITS(
     GRB_TRY (GrB_Vector_new (&h, GrB_FP32, n));
     GRB_TRY (GrB_Vector_new (&a, GrB_FP32, n)) ;
     
-    float defaultValue = 1.0/n;
+    float defaultValue = 1.0;
     GRB_TRY(GrB_assign(a, NULL, NULL, defaultValue, GrB_ALL, n, NULL));
     GRB_TRY(GrB_assign(h, NULL, NULL, defaultValue, GrB_ALL, n, NULL));
 
