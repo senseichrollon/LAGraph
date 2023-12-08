@@ -116,7 +116,7 @@ int main (int argc, char **argv)
 
         double total_time = 0 ;
 
-        for (int trial = 0 ; trial < ntrials ; trial++)
+        for (int trial = 0 ; trial < 1 ; trial++)
         {
             GrB_free (&PR) ;
             double t1 = LAGraph_WallClockTime ( ) ;
@@ -155,7 +155,7 @@ int main (int argc, char **argv)
 
         double total_time = 0 ;
 
-        for (int trial = 0 ; trial < ntrials ; trial++)
+        for (int trial = 0 ; trial < 1 ; trial++)
         {
             GrB_free (&PR) ;
             double t1 = LAGraph_WallClockTime ( ) ;
