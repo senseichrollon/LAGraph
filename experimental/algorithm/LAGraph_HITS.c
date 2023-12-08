@@ -115,13 +115,14 @@ int LAGr_HITS(
         // GxB_set(GxB_BURBLE, false);
 
         
-        float maxA;
-        GRB_TRY(GrB_reduce(&maxA, NULL, GrB_MAX_MONOID_FP32, a, NULL));
-        GRB_TRY(GrB_assign(a,NULL, GrB_DIV_FP32, maxA, GrB_ALL, n, NULL));
+        // float maxA;
+        float sumA;
+        GRB_TRY(GrB_reduce(&sumA, NULL, GrB_PLUS_MONOID_FP32, a, NULL)); // Calculate the sum of all elements in the vector
+        GRB_TRY(GrB_assign(a, NULL, GrB_DIV_FP32, sumA, GrB_ALL, n, NULL)); // Divide all elements by the sum
         
-        float maxH;
-        GRB_TRY(GrB_reduce(&maxH, NULL, GrB_MAX_MONOID_FP32, h, NULL));
-        GRB_TRY(GrB_assign(h,NULL, GrB_DIV_FP32, maxH, GrB_ALL, n, NULL));
+        float sumH;
+        GRB_TRY(GrB_reduce(&sumH, NULL, GrB_PLUS_MONOID_FP32, h, NULL)); // Calculate the sum of all elements in the vector
+        GRB_TRY(GrB_assign(h, NULL, GrB_DIV_FP32, sumH, GrB_ALL, n, NULL)); // Divide all elements by the sum
     
         // Deal with tolerance
 
