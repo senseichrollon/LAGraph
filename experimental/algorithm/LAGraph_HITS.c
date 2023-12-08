@@ -46,8 +46,8 @@ int LAGr_HITS(
     GrB_Vector h = NULL, a = NULL, h_old = NULL, a_old=NULL;
     LG_ASSERT (hubs != NULL, GrB_NULL_POINTER) ;
     LG_ASSERT (authorities != NULL, GrB_NULL_POINTER) ;
-    LG_ASSERT(G->in_degree != NULL, "G->in_degree required");
-    LG_ASSERT(G->out_degree != NULL, "G->out_degree required");
+    // LG_ASSERT(G->in_degree != NULL, "G->in_degree required");
+    // LG_ASSERT(G->out_degree != NULL, "G->out_degree required");
     printf("hi3\n");
     LG_TRY (LAGraph_CheckGraph (G, msg)) ;
     GrB_Matrix AT ;
