@@ -82,7 +82,7 @@ int main (int argc, char **argv)
     printf ("Time to read the graph:      %g sec\n", t) ;
 
     printf ("\n==========================The input graph matrix G:\n") ;
-    LG_TRY (LAGraph_Graph_Print (G, LAGraph_SHORT, stdout, msg)) ;
+    // LG_TRY (LAGraph_Graph_Print (G, LAGraph_SHORT, stdout, msg)) ;
     LG_TRY(LAGraph_Cached_OutDegree(G, msg));
         LG_TRY(LAGraph_Cached_InDegree(G, msg));
 
